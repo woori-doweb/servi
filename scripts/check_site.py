@@ -4,7 +4,8 @@
   python -X utf8 scripts/check_site.py --base https://servi.im   # also check the deployed site
 
 Local: every root-relative href/src exists, every sitemap URL maps to a page, every
-data-download id is defined in assets/site.js, no banned third-party product names.
+data-download id is defined in assets/site.js, no banned third-party product names, every page
+loads the consent banner and links the privacy policy, GA loads only after consent.
 Metadata: each indexable page has title, description, canonical = its sitemap URL, an og:image
 that exists in the repo, JSON-LD that parses, and FAQPage questions equal to the visible FAQ.
 Release: for each app in site.js, the newest matching GitHub release has a win-x64.zip
@@ -20,7 +21,7 @@ import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "ohmyzip/index.html", "ohmypic/index.html", "404.html"]
+PAGES = ["index.html", "ohmyzip/index.html", "ohmypic/index.html", "privacy/index.html", "404.html"]  # first 3: metadata checks
 BANNED = re.compile(r"alsee|알씨|estsoft|altools|bandi|반디|winrar|winzip|7-zip|7zip|honeyview", re.I)
 
 failures = []
@@ -94,13 +95,20 @@ def local(apps):
         for app in set(re.findall(r'data-download="(\w+)"', html)):
             check(app in apps, f"{page}: data-download={app} defined in site.js")
         scripts = re.findall(r'<script src="(/assets/[^"]+\.js)"', html)
-        check(any(s in ("/assets/site.js", "/assets/analytics.js") for s in scripts), f"{page}: loads analytics ({scripts})")
+        check("/assets/consent.js" in scripts and "googletagmanager" not in html,
+              f"{page}: loads consent.js, no direct Google tag ({scripts})")
+        check('href="/privacy/"' in html and "data-consent-open" in html, f"{page}: privacy link and cookie settings button")
     for js in (ROOT / "assets").glob("*.js"):
         for imp in re.findall(r"from '(\./[^']+)'", js.read_text(encoding="utf-8")):
             check((js.parent / imp).is_file(), f"{js.name}: import {imp} exists")
     ga = (ROOT / "assets/analytics.js").read_text(encoding="utf-8")
     check(bool(re.search(r"MEASUREMENT_ID = 'G-[A-Z0-9]{10}'", ga)) and "location.hostname === 'servi.im'" in ga,
           "analytics.js: GA4 measurement ID set, sends only on servi.im")
+    defaults = re.search(r"gtag\('consent', 'default', \{(.*?)\}\)", ga, re.S)
+    check(bool(defaults) and all(f"{k}: 'denied'" in defaults[1] for k in
+                                 ("ad_storage", "ad_user_data", "ad_personalization", "analytics_storage")),
+          "analytics.js: Consent Mode v2 defaults all denied")
+    check("if (enabled && current === 'granted') load();" in ga, "analytics.js: GA loads only after stored consent")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for loc in re.findall(r"<loc>https://servi\.im/([^<]*)</loc>", sitemap):
         check((ROOT / loc / "index.html").is_file(), f"sitemap: /{loc} has a page")
@@ -127,11 +135,11 @@ def releases(apps):
 
 
 def deployed(base):
-    for page in PAGES[:3]:
+    for page in PAGES[:4]:
         url = base.rstrip("/") + "/" + page.removesuffix("index.html")
         status, body = request(url)
         check(status == 200 and body == (ROOT / page).read_bytes(), f"{url} -> {status}, bytes match repo")
-    for ref in ["/assets/style.css", "/assets/site.js", "/assets/analytics.js", "/assets/icons/ohmyzip.png",
+    for ref in ["/assets/style.css", "/assets/site.js", "/assets/analytics.js", "/assets/consent.js", "/assets/icons/ohmyzip.png",
                 "/assets/og/home.png", "/robots.txt", "/sitemap.xml", "/llms.txt"]:
         status, body = request(base.rstrip("/") + ref)
         check(status == 200 and body == (ROOT / ref.lstrip("/")).read_bytes(), f"{ref} -> {status}, bytes match repo")

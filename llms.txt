@@ -17,3 +17,8 @@
 - [ohMypic 릴리스 목록](https://github.com/woori-doweb/ohmyzip/releases?q=ohmypic)
 - [소스 저장소](https://github.com/woori-doweb/ohmyzip): `git clone https://github.com/woori-doweb/ohmyzip.git` (ohmyZip은 `ohmyzip/`, ohMypic은 `ohmypic/` 폴더)
 - [이 사이트의 저장소](https://github.com/woori-doweb/servi)
+
+## 운영
+
+- 운영자: servi, 문의 woorimro@gmail.com
+- [개인정보처리방침](https://servi.im/privacy/): 방문 통계(Google 애널리틱스)는 쿠키 동의 후에만 수집
