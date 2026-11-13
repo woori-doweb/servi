@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ohMypic — Windows 이미지 뷰어 | servi</title>
+  <meta name="description" content="ohMypic은 Windows용 무료 이미지 탐색기·뷰어입니다. 썸네일 목록, 크게보기, 연속보기, 회전·크기변경·포맷변환·일괄편집을 지원합니다.">
+  <link rel="canonical" href="https://servi.im/ohmypic/">
+  <meta property="og:site_name" content="servi">
+  <meta property="og:title" content="ohMypic — Windows 이미지 뷰어">
+  <meta property="og:description" content="폴더의 이미지를 훑고, 크게 보고, 한 번에 편집하는 무료 이미지 뷰어.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://servi.im/ohmypic/">
+  <meta property="og:image" content="https://servi.im/assets/icons/ohmypic.png">
+  <meta name="theme-color" content="#2F5BEA">
+  <link rel="icon" type="image/png" href="/assets/icons/ohmypic.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <nav class="site">
+    <div class="wrap">
+      <a class="logo" href="/">servi<em>.</em>im</a>
+      <div class="nav-links">
+        <a href="/#products">제품</a>
+        <a href="#features" class="hide-mobile">기능</a>
+        <a href="https://github.com/woori-doweb/ohmyzip/tree/main/ohmypic">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="product-hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Utility · Windows · 미리보기</p>
+        <h1>ohMypic</h1>
+        <p class="sub">폴더의 이미지를 썸네일로 훑고, 한 장을 크게 보고, 여러 장을 한 번에 편집하는 Windows 이미지 뷰어입니다.</p>
+        <div class="hero-actions">
+          <a class="btn primary" data-download="ohmypic" href="https://github.com/woori-doweb/ohmyzip/releases?q=ohmypic">내려받기 <small data-version="ohmypic"></small></a>
+          <a class="btn ghost" data-notes="ohmypic" href="https://github.com/woori-doweb/ohmyzip/releases?q=ohmypic">릴리스 노트</a>
+        </div>
+        <p class="meta">Windows 10 1809+ / 11 (x64) · <span data-size="ohmypic">zip 배포본</span> · <span data-date="ohmypic">GitHub 릴리스</span> · <a data-sha="ohmypic" href="#" hidden>SHA-256</a></p>
+      </div>
+      <img class="icon" src="/assets/icons/ohmypic.png" alt="ohMypic 아이콘" width="168" height="168">
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>할 수 <em>있는</em> 일</h2>
+          <p>창 하나에 목록보기와 크게보기 두 가지 모드가 있습니다.</p>
+        </div>
+        <div class="features">
+          <div class="feature"><h3>목록보기</h3><p>폴더 트리, 썸네일·아이콘·목록·자세히·필름스트립 보기, 이름·종류·크기·날짜 정렬, 미리보기와 카메라 정보 창.</p></div>
+          <div class="feature"><h3>크게보기</h3><p>포인터 기준 휠 확대, 실제 크기·창에 맞추기, 내비게이터, 전체 화면. 화살표와 Space로 다음 이미지로 넘깁니다.</p></div>
+          <div class="feature"><h3>연속보기</h3><p>F5로 시작합니다. 이미지당 시간과 페이드 효과를 환경설정에서 정합니다.</p></div>
+          <div class="feature"><h3>편집</h3><p>회전하기, 크기변경, 포맷변환. JPEG는 크기가 맞으면 화질 손실 없이 회전합니다.</p></div>
+          <div class="feature"><h3>일괄편집</h3><p>여러 이미지의 크기변경·회전·이름 바꾸기·포맷변환을 한 번에 처리합니다.</p></div>
+          <div class="feature"><h3>탐색기 메뉴</h3><p>이미지를 오른쪽 클릭해 열기·연속보기·회전·크기변경·포맷변환·일괄편집. 현재 사용자 범위에만 등록합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>설치와 <em>업데이트</em></h2>
+          <p>설치 프로그램 없이 압축을 풀어 실행합니다.</p>
+        </div>
+        <ul class="req">
+          <li>Windows 10 1809 이상 또는 Windows 11 (x64)</li>
+          <li>.NET Desktop Runtime 9 (x64) — 없으면 처음 실행할 때 Windows가 설치를 안내합니다.</li>
+          <li>받은 zip을 원하는 폴더에 풀고 <code class="inline">ohMypic.exe</code>를 실행합니다. 인자 없이 열면 사진 폴더를 엽니다.</li>
+          <li>BMP·GIF·JPEG·PNG·TIFF·ICO·JPEG XR. WebP·HEIC·AVIF는 해당 Windows 확장 코덱이 있을 때 열립니다.</li>
+          <li>새 버전은 하루 한 번 확인하고 창을 닫을 때 설치합니다. 환경설정에서 끌 수 있습니다.</li>
+        </ul>
+        <p class="note">미리보기 단계의 배포본입니다. 아직 코드 서명이 없어 처음 실행할 때 Windows가 경고할 수 있습니다.</p>
+        <div class="code"><code>git clone https://github.com/woori-doweb/ohmyzip.git</code><button type="button">복사</button></div>
+        <p class="note">ohMypic 소스는 저장소의 <code class="inline">ohmypic/</code> 폴더에 있습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 servi.im</span>
+      <span><a href="/">모든 제품</a> · <a href="https://github.com/woori-doweb/ohmyzip/releases">전체 릴리스</a></span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js" type="module"></script>
+</body>
+</html>
