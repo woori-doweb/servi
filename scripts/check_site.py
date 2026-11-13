@@ -9,7 +9,7 @@ loads the consent banner and links the privacy policy, GA loads only after conse
 Metadata: each indexable page has title, description, canonical = its sitemap URL, an og:image
 that exists in the repo, JSON-LD that parses, and FAQPage questions equal to the visible FAQ.
 Private source: pages in PRIVATE have no GitHub or git clone links.
-Services: every link to a *.servi.im service answers 200 (skipped with --offline).
+Services: every link to a *.servi.im service opens in a new tab and answers 200 (200 check skipped with --offline).
 Release: for each app in site.js, the newest matching GitHub release has a win-x64.zip
 asset whose download URL answers 200 (after redirects).
 Deployed (--base): pages 200 with the same bytes as the repo, unknown path 404.
@@ -130,6 +130,10 @@ def local(apps):
     for page in PRIVATE:
         html = (ROOT / page).read_text(encoding="utf-8").lower()
         check("github" not in html and "git clone" not in html, f"{page}: private source, no GitHub or git clone link")
+    for page in PAGES:
+        tags = re.findall(r'<a [^>]*href="https://[a-z0-9-]+\.servi\.im/[^>]*>', (ROOT / page).read_text(encoding="utf-8"))
+        bad = [t for t in tags if 'target="_blank"' not in t or 'rel="noopener"' not in t]
+        check(not bad, f"{page}: {len(tags)} service link(s) open in a new tab (target=_blank rel=noopener)")
 
 
 def services():
