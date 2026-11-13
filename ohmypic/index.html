@@ -11,8 +11,57 @@
   <meta property="og:description" content="폴더의 이미지를 훑고, 크게 보고, 한 번에 편집하는 무료 이미지 뷰어.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://servi.im/ohmypic/">
-  <meta property="og:image" content="https://servi.im/assets/icons/ohmypic.png">
+  <meta property="og:image" content="https://servi.im/assets/og/ohmypic.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ohMypic — Windows 이미지 뷰어">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#2F5BEA">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://servi.im/ohmypic/#app",
+        "name": "ohMypic",
+        "url": "https://servi.im/ohmypic/",
+        "description": "폴더의 이미지를 썸네일로 훑고, 한 장을 크게 보고, 여러 장을 한 번에 편집하는 Windows 이미지 뷰어.",
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Image viewer",
+        "operatingSystem": "Windows 10 1809+, Windows 11 (x64)",
+        "softwareRequirements": ".NET Desktop Runtime 9 (x64)",
+        "featureList": ["썸네일·아이콘·목록·자세히·필름스트립 보기", "크게보기와 전체 화면", "연속보기", "회전·크기변경·포맷변환", "JPEG 무손실 회전", "일괄편집", "탐색기 오른쪽 클릭 메뉴"],
+        "image": "https://servi.im/assets/icons/ohmypic.png",
+        "downloadUrl": "https://github.com/woori-doweb/ohmyzip/releases?q=ohmypic",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+        "inLanguage": ["en", "ko"],
+        "publisher": { "@id": "https://servi.im/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "servi", "item": "https://servi.im/" },
+          { "@type": "ListItem", "position": 2, "name": "ohMypic", "item": "https://servi.im/ohmypic/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "ohMypic은 무료인가요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 무료로 내려받아 쓸 수 있고, 소스 코드는 GitHub woori-doweb/ohmyzip 저장소의 ohmypic 폴더에 공개되어 있습니다." } },
+          { "@type": "Question", "name": "어떤 이미지 형식을 열 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "BMP, GIF, JPEG, PNG, TIFF, ICO, JPEG XR을 엽니다. WebP, HEIC, HEIF, AVIF는 해당 Windows 확장 코덱이 설치되어 있을 때 열립니다." } },
+          { "@type": "Question", "name": "설치가 필요한가요?", "acceptedAnswer": { "@type": "Answer", "text": "설치 프로그램은 없습니다. 받은 zip을 원하는 폴더에 풀고 ohMypic.exe를 실행합니다. .NET Desktop Runtime 9(x64)가 필요하며, 없으면 처음 실행할 때 Windows가 설치를 안내합니다." } },
+          { "@type": "Question", "name": "JPEG를 회전하면 화질이 떨어지나요?", "acceptedAnswer": { "@type": "Answer", "text": "이미지 크기가 JPEG 블록 단위에 맞으면 화질 손실 없이 회전합니다." } },
+          { "@type": "Question", "name": "여러 이미지를 한 번에 바꿀 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "일괄편집(Ctrl+M)으로 크기변경, 회전, 이름 바꾸기, 포맷변환을 여러 이미지에 한 번에 적용합니다." } },
+          { "@type": "Question", "name": "미리보기 단계란 무엇인가요?", "acceptedAnswer": { "@type": "Answer", "text": "ohMypic은 아직 정식 버전 전이며 GitHub에 사전 릴리스(prerelease)로 배포됩니다. 기능과 화면이 바뀔 수 있습니다." } }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/png" href="/assets/icons/ohmypic.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,6 +131,22 @@
         <p class="note">미리보기 단계의 배포본입니다. 아직 코드 서명이 없어 처음 실행할 때 Windows가 경고할 수 있습니다.</p>
         <div class="code"><code>git clone https://github.com/woori-doweb/ohmyzip.git</code><button type="button">복사</button></div>
         <p class="note">ohMypic 소스는 저장소의 <code class="inline">ohmypic/</code> 폴더에 있습니다.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>자주 묻는 <em>질문</em></h2>
+        </div>
+        <div class="faq">
+          <details open><summary>ohMypic은 무료인가요?</summary><p>네. 무료로 내려받아 쓸 수 있고, 소스 코드는 GitHub <a href="https://github.com/woori-doweb/ohmyzip/tree/main/ohmypic">woori-doweb/ohmyzip</a> 저장소의 ohmypic 폴더에 공개되어 있습니다.</p></details>
+          <details><summary>어떤 이미지 형식을 열 수 있나요?</summary><p>BMP, GIF, JPEG, PNG, TIFF, ICO, JPEG XR을 엽니다. WebP, HEIC, HEIF, AVIF는 해당 Windows 확장 코덱이 설치되어 있을 때 열립니다.</p></details>
+          <details><summary>설치가 필요한가요?</summary><p>설치 프로그램은 없습니다. 받은 zip을 원하는 폴더에 풀고 ohMypic.exe를 실행합니다. .NET Desktop Runtime 9(x64)가 필요하며, 없으면 처음 실행할 때 Windows가 설치를 안내합니다.</p></details>
+          <details><summary>JPEG를 회전하면 화질이 떨어지나요?</summary><p>이미지 크기가 JPEG 블록 단위에 맞으면 화질 손실 없이 회전합니다.</p></details>
+          <details><summary>여러 이미지를 한 번에 바꿀 수 있나요?</summary><p>일괄편집(Ctrl+M)으로 크기변경, 회전, 이름 바꾸기, 포맷변환을 여러 이미지에 한 번에 적용합니다.</p></details>
+          <details><summary>미리보기 단계란 무엇인가요?</summary><p>ohMypic은 아직 정식 버전 전이며 GitHub에 사전 릴리스(prerelease)로 배포됩니다. 기능과 화면이 바뀔 수 있습니다.</p></details>
+        </div>
       </div>
     </section>
   </main>

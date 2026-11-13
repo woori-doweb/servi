@@ -5,6 +5,8 @@
 
 Local: every root-relative href/src exists, every sitemap URL maps to a page, every
 data-download id is defined in assets/site.js, no banned third-party product names.
+Metadata: each indexable page has title, description, canonical = its sitemap URL, an og:image
+that exists in the repo, JSON-LD that parses, and FAQPage questions equal to the visible FAQ.
 Release: for each app in site.js, the newest matching GitHub release has a win-x64.zip
 asset whose download URL answers 200 (after redirects).
 Deployed (--base): pages 200 with the same bytes as the repo, unknown path 404.
@@ -47,6 +49,40 @@ def apps_from_js():
     return apps
 
 
+def meta(html, name):
+    m = re.search(rf'<meta (?:name|property)="{re.escape(name)}" content="([^"]*)"', html)
+    return m[1] if m else None
+
+
+def metadata():
+    for page in PAGES[:3]:
+        html = (ROOT / page).read_text(encoding="utf-8")
+        url = "https://servi.im/" + page.removesuffix("index.html")
+        title = re.search(r"<title>(.+?)</title>", html)
+        check(bool(title) and len(title[1]) <= 60, f"{page}: title ({title and len(title[1])} chars, <= 60)")
+        desc = meta(html, "description")
+        check(bool(desc) and 50 <= len(desc) <= 160, f"{page}: description ({desc and len(desc)} chars, 50-160)")
+        canon = re.search(r'<link rel="canonical" href="([^"]+)"', html)
+        check(bool(canon) and canon[1] == url and meta(html, "og:url") == url, f"{page}: canonical and og:url = {url}")
+        img = meta(html, "og:image") or ""
+        check(img.startswith("https://servi.im/") and (ROOT / img.removeprefix("https://servi.im/")).is_file(),
+              f"{page}: og:image {img} exists")
+        graph = []
+        for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
+            try:
+                graph += json.loads(block)["@graph"]
+            except (ValueError, KeyError) as e:
+                check(False, f"{page}: JSON-LD parses ({e})")
+        check(bool(graph), f"{page}: JSON-LD types {[g['@type'] for g in graph]}")
+        faq = [g for g in graph if g["@type"] == "FAQPage"]
+        visible = re.findall(r"<summary>(.+?)</summary>", html)
+        schema_q = [q["name"] for f in faq for q in f["mainEntity"]]
+        check(visible == schema_q, f"{page}: FAQPage questions match visible FAQ ({len(schema_q)})")
+        for g in graph:
+            if g["@type"] == "SoftwareApplication":
+                check(g.get("url") == url, f"{page}: SoftwareApplication url = canonical")
+
+
 def local(apps):
     for page in PAGES:
         html = (ROOT / page).read_text(encoding="utf-8")
@@ -87,7 +123,8 @@ def deployed(base):
         url = base.rstrip("/") + "/" + page.removesuffix("index.html")
         status, body = request(url)
         check(status == 200 and body == (ROOT / page).read_bytes(), f"{url} -> {status}, bytes match repo")
-    for ref in ["/assets/style.css", "/assets/site.js", "/assets/icons/ohmyzip.png", "/robots.txt", "/sitemap.xml"]:
+    for ref in ["/assets/style.css", "/assets/site.js", "/assets/icons/ohmyzip.png", "/assets/og/home.png",
+                "/robots.txt", "/sitemap.xml", "/llms.txt"]:
         status, body = request(base.rstrip("/") + ref)
         check(status == 200 and body == (ROOT / ref.lstrip("/")).read_bytes(), f"{ref} -> {status}, bytes match repo")
     status, _ = request(base.rstrip("/") + "/no-such-page-check")
@@ -102,6 +139,7 @@ def main():
     apps = apps_from_js()
     check(len(apps) > 0, f"site.js defines apps: {', '.join(apps)}")
     local(apps)
+    metadata()
     if not a.offline:
         releases(apps)
     if a.base:

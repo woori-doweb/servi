@@ -1,0 +1,19 @@
+# servi
+
+> servi.im은 직접 만들어 쓰는 프로그램·유틸리티·서비스·솔루션을 모아 두는 사이트입니다. 지금은 Windows 데스크톱 앱 두 개(ohmyZip, ohMypic)를 무료로 배포하며, 배포본과 소스는 GitHub에 공개되어 있습니다.
+
+- 배포본: 각 앱의 GitHub 릴리스에 있는 `win-x64.zip`과 같은 이름의 `.sha256` 파일. 설치 프로그램과 코드 서명은 아직 없습니다.
+- 공통 요구 사항: Windows 10 1809 이상 또는 Windows 11 (x64), .NET Desktop Runtime 9 (x64).
+- 화면 언어: 영어가 기본이며 한국어가 함께 들어 있습니다.
+
+## 제품
+
+- [ohmyZip](https://servi.im/ohmyzip/): Windows 압축 관리자. ZIP·7Z·RAR·TAR·GZ·TGZ 열기와 풀기, ZIP·7Z·TAR·TAR.GZ·GZ 만들기(RAR 만들기는 없음), AES-256 암호, 대상 폴더 밖 경로를 거부하는 안전한 풀기, 탐색기 오른쪽 클릭 메뉴. 정식 릴리스(태그 `v*`).
+- [ohMypic](https://servi.im/ohmypic/): Windows 이미지 뷰어. 썸네일 목록, 크게보기, 연속보기, 회전·크기변경·포맷변환, 일괄편집, 크기가 맞는 JPEG의 무손실 회전. BMP·GIF·JPEG·PNG·TIFF·ICO·JPEG XR, 코덱이 있으면 WebP·HEIC·HEIF·AVIF. 미리보기 단계(태그 `ohmypic-v*`, prerelease).
+
+## 내려받기와 소스
+
+- [ohmyZip 최신 릴리스](https://github.com/woori-doweb/ohmyzip/releases/latest)
+- [ohMypic 릴리스 목록](https://github.com/woori-doweb/ohmyzip/releases?q=ohmypic)
+- [소스 저장소](https://github.com/woori-doweb/ohmyzip): `git clone https://github.com/woori-doweb/ohmyzip.git` (ohmyZip은 `ohmyzip/`, ohMypic은 `ohmypic/` 폴더)
+- [이 사이트의 저장소](https://github.com/woori-doweb/servi)

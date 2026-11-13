@@ -9,8 +9,10 @@ ohmyzip/index.html    ohmyZip page
 ohmypic/index.html    ohMypic page
 404.html              not-found page (wire it as the server's 404 document)
 assets/               style.css, site.js, favicon.svg, icons/
-robots.txt, sitemap.xml
+assets/og/            1200x630 social preview images, assets/logo-512.png (Organization logo)
+robots.txt, sitemap.xml, llms.txt
 scripts/check_site.py site check (not served)
+scripts/make_images.py regenerates assets/og/*.png and the logo (not served)
 ```
 
 ## Downloads
@@ -24,9 +26,12 @@ New releases appear on the site without a redeploy.
 
 1. Copy an `<article class="card">` in `index.html`; set `data-cat` to `utility`, `program`, `service` or `solution`.
 2. Add `<name>/index.html` (copy an existing product page) and an icon in `assets/icons/`.
-3. If it ships GitHub releases, add an entry to `APPS` in `assets/site.js` and use `data-download="<id>"`.
-4. Add the page to `sitemap.xml`.
-5. `python -X utf8 scripts/check_site.py` must end with `0 failure(s)`.
+   Update its title, description, canonical/og:url, the `SoftwareApplication`/`BreadcrumbList` JSON-LD and the FAQ.
+   The `FAQPage` questions must be the same, in the same order, as the visible `<summary>` items.
+3. Add the product to `CARDS` in `scripts/make_images.py`, run it, and point `og:image` at `assets/og/<name>.png`.
+4. If it ships GitHub releases, add an entry to `APPS` in `assets/site.js` and use `data-download="<id>"`.
+5. Add the page to `sitemap.xml` (with `lastmod`), to the home `ItemList` JSON-LD, and a line to `llms.txt`.
+6. `python -X utf8 scripts/check_site.py` must end with `0 failure(s)`.
 
 ## Check
 
