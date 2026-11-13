@@ -8,6 +8,8 @@ data-download id is defined in assets/site.js, no banned third-party product nam
 loads the consent banner and links the privacy policy, GA loads only after consent.
 Metadata: each indexable page has title, description, canonical = its sitemap URL, an og:image
 that exists in the repo, JSON-LD that parses, and FAQPage questions equal to the visible FAQ.
+Private source: pages in PRIVATE have no GitHub or git clone links.
+Services: every link to a *.servi.im service answers 200 (skipped with --offline).
 Release: for each app in site.js, the newest matching GitHub release has a win-x64.zip
 asset whose download URL answers 200 (after redirects).
 Deployed (--base): pages 200 with the same bytes as the repo, unknown path 404.
@@ -21,7 +23,11 @@ import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "ohmyzip/index.html", "ohmypic/index.html", "privacy/index.html", "404.html"]  # first 3: metadata checks
+PAGES = ["index.html", "ohmyzip/index.html", "ohmypic/index.html", "dojang/index.html", "privacy/index.html", "404.html"]
+INDEXABLE = [p for p in PAGES if p != "404.html"]  # deployed byte compare
+META = [p for p in INDEXABLE if p != "privacy/index.html"]  # title/description/og/JSON-LD checks
+PRIVATE = ["dojang/index.html"]  # products whose source is not public
+SERVICE_LINK = re.compile(r'href="(https://[a-z0-9-]+\.servi\.im/[^"]*)"')
 BANNED = re.compile(r"alsee|알씨|estsoft|altools|bandi|반디|winrar|winzip|7-zip|7zip|honeyview", re.I)
 
 failures = []
@@ -56,7 +62,7 @@ def meta(html, name):
 
 
 def metadata():
-    for page in PAGES[:3]:
+    for page in META:
         html = (ROOT / page).read_text(encoding="utf-8")
         url = "https://servi.im/" + page.removesuffix("index.html")
         title = re.search(r"<title>(.+?)</title>", html)
@@ -82,6 +88,11 @@ def metadata():
         for g in graph:
             if g["@type"] == "SoftwareApplication":
                 check(g.get("url") == url, f"{page}: SoftwareApplication url = canonical")
+            if g["@type"] == "WebApplication":
+                live = g.get("url", "")
+                check(bool(SERVICE_LINK.fullmatch(f'href="{live}"')) and f'href="{live}"' in html
+                      and g.get("@id") == url + "#app" and "downloadUrl" not in g,
+                      f"{page}: WebApplication url {live} is a linked service, @id on this page, no downloadUrl")
 
 
 def local(apps):
@@ -116,6 +127,16 @@ def local(apps):
             if p.is_file() and ".git" not in p.parts and p.suffix in {".html", ".css", ".js", ".xml", ".txt", ".md", ".svg"}
             and p.name != "check_site.py" and BANNED.search(p.read_text(encoding="utf-8"))]
     check(not hits, f"no banned names ({', '.join(hits) or 'none'})")
+    for page in PRIVATE:
+        html = (ROOT / page).read_text(encoding="utf-8").lower()
+        check("github" not in html and "git clone" not in html, f"{page}: private source, no GitHub or git clone link")
+
+
+def services():
+    links = sorted({u for page in PAGES for u in SERVICE_LINK.findall((ROOT / page).read_text(encoding="utf-8"))})
+    for url in links:
+        status, _ = request(url)
+        check(status == 200, f"service {url} -> {status}")
 
 
 def releases(apps):
@@ -135,7 +156,7 @@ def releases(apps):
 
 
 def deployed(base):
-    for page in PAGES[:4]:
+    for page in INDEXABLE:
         url = base.rstrip("/") + "/" + page.removesuffix("index.html")
         status, body = request(url)
         check(status == 200 and body == (ROOT / page).read_bytes(), f"{url} -> {status}, bytes match repo")
@@ -158,6 +179,7 @@ def main():
     metadata()
     if not a.offline:
         releases(apps)
+        services()
     if a.base:
         deployed(a.base)
     print(f"\n{len(failures)} failure(s)")

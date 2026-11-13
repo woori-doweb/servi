@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>servi — 직접 만든 프로그램과 서비스</title>
-  <meta name="description" content="servi.im — 직접 만들어 쓰는 프로그램·유틸리티·서비스·솔루션을 한 곳에서. 압축 관리자 ohmyZip, 이미지 뷰어 ohMypic을 무료로 내려받으세요.">
+  <meta name="description" content="servi.im — 직접 만들어 쓰는 프로그램·유틸리티·서비스·솔루션을 한 곳에서. 압축 관리자 ohmyZip, 이미지 뷰어 ohMypic, 도장 이미지 만들기 인주공방을 무료로 쓰세요.">
   <link rel="canonical" href="https://servi.im/">
   <meta property="og:site_name" content="servi">
   <meta property="og:title" content="servi — 직접 만든 프로그램과 서비스">
-  <meta property="og:description" content="압축 관리자 ohmyZip, 이미지 뷰어 ohMypic 등 작고 단단한 도구들을 한 곳에서.">
+  <meta property="og:description" content="압축 관리자 ohmyZip, 이미지 뷰어 ohMypic, 도장 이미지 서비스 인주공방 등 작고 단단한 도구들을 한 곳에서.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <meta property="og:url" content="https://servi.im/">
@@ -49,7 +49,8 @@
         "name": "servi 제품",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "url": "https://servi.im/ohmyzip/", "name": "ohmyZip" },
-          { "@type": "ListItem", "position": 2, "url": "https://servi.im/ohmypic/", "name": "ohMypic" }
+          { "@type": "ListItem", "position": 2, "url": "https://servi.im/ohmypic/", "name": "ohMypic" },
+          { "@type": "ListItem", "position": 3, "url": "https://servi.im/dojang/", "name": "인주공방" }
         ]
       }
     ]
@@ -78,7 +79,7 @@
     <div class="wrap">
       <p class="eyebrow">Programs · Utilities · Services · Solutions</p>
       <h1>매일 쓰는 도구를<br><em>직접</em> 만듭니다</h1>
-      <p class="sub">servi는 직접 만들어 쓰는 프로그램과 서비스를 모아 두는 곳입니다. 모든 배포본은 GitHub 릴리스에서 바로 내려받고, 소스는 git으로 받을 수 있습니다.</p>
+      <p class="sub">servi는 직접 만들어 쓰는 프로그램과 서비스를 모아 두는 곳입니다. 웹 서비스는 주소를 열어 바로 쓰고, Windows 앱은 GitHub 릴리스에서 내려받습니다. 소스를 공개한 앱은 git으로도 받을 수 있습니다.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#products">제품 둘러보기</a>
         <a class="btn ghost" href="#download">내려받는 방법</a>
@@ -91,7 +92,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>지금 <em>쓸 수 있는</em> 것들</h2>
-          <p>Windows 데스크톱 앱부터 시작합니다. 새 프로그램·서비스·솔루션은 이 목록에 계속 추가됩니다.</p>
+          <p>Windows 앱과 웹 서비스가 있습니다. 새 프로그램·서비스·솔루션은 이 목록에 계속 추가됩니다.</p>
         </div>
 
         <div class="cat-nav" role="toolbar" aria-label="분류">
@@ -142,6 +143,26 @@
               <a class="btn ghost" href="/ohmypic/">자세히</a>
             </div>
           </article>
+
+          <article class="card" data-cat="service">
+            <div class="card-top">
+              <img src="/assets/icons/dojang.png" alt="" width="56" height="56">
+              <div>
+                <h3><a href="/dojang/">인주공방</a></h3>
+                <p class="tagline">도장 이미지 만들기 · 웹</p>
+              </div>
+            </div>
+            <p class="desc">이름이나 회사명을 넣어 개인 도장, 회사 사각·원형 직인, 낙관 모양의 도장 이미지를 만듭니다. 투명 PNG와 SVG로 받습니다. 인감증명·본인 인증은 아닙니다.</p>
+            <div class="meta">
+              <span class="badge live">운영 중</span>
+              <span>설치 없음</span>
+              <span>· 무료</span>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://dojang.servi.im/">바로 쓰기</a>
+              <a class="btn ghost" href="/dojang/">자세히</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -150,7 +171,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>내려받는 <em>방법</em></h2>
-          <p>설치 프로그램 없이 압축 파일 하나로 배포합니다. 모든 릴리스는 GitHub에 공개되어 있습니다.</p>
+          <p>Windows 앱은 설치 프로그램 없이 압축 파일 하나로 배포하고, 모든 릴리스는 GitHub에 공개되어 있습니다. 웹 서비스는 내려받을 것 없이 <strong>바로 쓰기</strong>로 엽니다.</p>
         </div>
         <div class="steps">
           <div class="step">
@@ -163,7 +184,7 @@
           </div>
           <div class="step">
             <h3>git으로 소스 받기</h3>
-            <p>소스 전체를 받아 직접 빌드할 수 있습니다.</p>
+            <p>ohmyZip과 ohMypic의 소스 전체를 받아 직접 빌드할 수 있습니다.</p>
             <div class="code"><code>git clone https://github.com/woori-doweb/ohmyzip.git</code><button type="button">복사</button></div>
           </div>
         </div>

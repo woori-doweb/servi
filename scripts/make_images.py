@@ -16,6 +16,7 @@ CARDS = {
     "home": (None, "servi.im", "직접 만든 프로그램 · 유틸리티 · 서비스"),
     "ohmyzip": ("ohmyzip", "ohmyZip", "Windows 압축 관리자 · 무료"),
     "ohmypic": ("ohmypic", "ohMypic", "Windows 이미지 뷰어 · 무료"),
+    "dojang": ("dojang", "인주공방", "도장 이미지 만들기 · 웹 서비스 · 무료"),
 }
 
 
@@ -41,7 +42,8 @@ def card(icon, title, tagline):
     d.rectangle([0, 0, 1200, 10], fill=ACCENT)
     art = logo(220) if icon is None else Image.open(ROOT / f"assets/icons/{icon}.png").convert("RGBA").resize((220, 220), Image.LANCZOS)
     im.paste(art, (110, 205), art)
-    d.text((380, 250), title, font=font("georgiab.ttf", 96), fill=INK, anchor="ls")
+    title_font = "georgiab.ttf" if title.isascii() else "malgunbd.ttf"  # Georgia has no Hangul
+    d.text((380, 250), title, font=font(title_font, 96), fill=INK, anchor="ls")
     d.text((384, 330), tagline, font=font("malgun.ttf", 40), fill=SOFT, anchor="ls")
     d.text((384, 410), "servi.im", font=font("malgunbd.ttf", 30), fill=ACCENT, anchor="ls")
     return im
