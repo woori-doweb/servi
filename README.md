@@ -30,7 +30,7 @@ Google Analytics 4 (`G-L2JC38M4HL`) loads only on `servi.im` and only after the 
 cookie banner (`assets/consent.js`). Before that no Google tag is requested. The choice is stored in localStorage
 (`servi:consent`); the footer "쿠키 설정" button reopens the banner. Withdrawal stops sending immediately
 (`ga-disable-<ID>`, `analytics_storage: denied`) and deletes the `_ga` cookies. Consent Mode v2 ad signals stay denied.
-Events (`download_click`, `release_notes_click`, `git_clone_copy`, `category_filter`, `faq_open`) go through `track()`.
+Events (`download_click`, `service_open` for web-service 「바로 쓰기」 links with `data-service`, `release_notes_click`, `git_clone_copy`, `category_filter`, `faq_open`) go through `track()`.
 If what analytics collects changes, update `privacy/index.html` and bump `VERSION` in `assets/analytics.js` so
 visitors are asked again. Every page must load `/assets/consent.js` and link `/privacy/`.
 

@@ -87,9 +87,11 @@ const PLACEMENT = location.pathname === '/' ? 'home' : 'product';
 function initTracking() {
   // Capture phase: the event is queued before the browser leaves for github.com.
   document.addEventListener('click', e => {
-    const a = e.target.closest('a[data-download], a[data-notes]');
+    const a = e.target.closest('a[data-download], a[data-notes], a[data-service]');
     if (!a) return;
-    if (a.dataset.download) {
+    if (a.dataset.service) {
+      track('service_open', { app: a.dataset.service, placement: PLACEMENT });
+    } else if (a.dataset.download) {
       track('download_click', { app: a.dataset.download, version: a.dataset.version || '(unknown)', placement: PLACEMENT });
     } else {
       track('release_notes_click', { app: a.dataset.notes });
