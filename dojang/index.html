@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인주공방 — 도장 이미지 만들기 웹 서비스 | servi</title>
+  <meta name="description" content="인주공방은 이름이나 회사명을 넣어 개인 도장, 회사 직인, 낙관 모양의 도장 이미지를 만드는 무료 웹 서비스입니다. 브라우저 안에서 만들고 투명 PNG와 SVG로 받습니다.">
+  <link rel="canonical" href="https://servi.im/dojang/">
+  <meta property="og:site_name" content="servi">
+  <meta property="og:title" content="인주공방 — 도장 이미지 만들기 웹 서비스">
+  <meta property="og:description" content="개인 도장, 회사 사각·원형 직인, 낙관 모양의 도장 이미지를 브라우저에서 만들어 투명 PNG와 SVG로 받는 무료 웹 서비스.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://servi.im/dojang/">
+  <meta property="og:image" content="https://servi.im/assets/og/dojang.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="인주공방 — 도장 이미지 만들기 웹 서비스">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#2F5BEA">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://servi.im/dojang/#app",
+        "name": "인주공방",
+        "url": "https://dojang.servi.im/",
+        "description": "이름이나 회사명을 넣어 개인 도장, 회사 사각 직인, 회사 원형 직인, 낙관 모양의 도장 이미지를 만듭니다. 브라우저 안에서 만들고, 투명 PNG와 글꼴 없이 열리는 SVG로 받을 수 있습니다. 회원가입이 없고 문구를 서버로 보내지 않습니다.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "웹 브라우저",
+        "browserRequirements": "JavaScript와 WebAssembly를 지원하는 최신 브라우저",
+        "featureList": ["개인 도장", "회사 사각 직인", "회사 원형 직인", "낙관", "투명 배경 PNG 1024×1024", "글꼴 없이 열리는 SVG", "브라우저 안에서만 처리, 문구를 서버로 보내지 않음"],
+        "image": "https://servi.im/assets/icons/dojang.png",
+        "screenshot": "https://dojang.servi.im/og.png",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+        "inLanguage": "ko",
+        "publisher": { "@id": "https://servi.im/#organization" },
+        "mainEntityOfPage": "https://servi.im/dojang/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "servi", "item": "https://servi.im/" },
+          { "@type": "ListItem", "position": 2, "name": "인주공방", "item": "https://servi.im/dojang/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "인주공방은 무료인가요?", "acceptedAnswer": { "@type": "Answer", "text": "네. 무료이고 회원가입 없이 https://dojang.servi.im/ 에서 바로 씁니다. 설치하거나 내려받을 프로그램은 없습니다." } },
+          { "@type": "Question", "name": "만든 도장 이미지를 인감이나 본인 인증에 쓸 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "아니요. 인주공방은 인감증명이나 본인 인증이 아니며 도장 이미지를 만들어 줄 뿐입니다. 쓰려는 곳에서 도장 이미지를 받아 주는지는 직접 확인해야 합니다." } },
+          { "@type": "Question", "name": "입력한 이름이나 회사명이 서버로 가나요?", "acceptedAnswer": { "@type": "Answer", "text": "아니요. 도장 이미지는 브라우저 안에서만 만들고, 입력한 문구와 이미지를 서버로 보내지 않으며 자동 저장하지 않습니다." } },
+          { "@type": "Question", "name": "어떤 파일로 받나요?", "acceptedAnswer": { "@type": "Answer", "text": "배경이 투명한 PNG(1024×1024)와 글꼴 없이 열리는 SVG로 받습니다." } },
+          { "@type": "Question", "name": "카카오톡에서 열었더니 파일이 받아지지 않아요.", "acceptedAnswer": { "@type": "Answer", "text": "카카오톡 안의 브라우저에서는 파일을 받을 수 없습니다. 휴대폰의 기본 브라우저로 열어 주세요." } }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" href="/assets/icons/dojang.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <nav class="site">
+    <div class="wrap">
+      <a class="logo" href="/">servi<em>.</em>im</a>
+      <div class="nav-links">
+        <a href="/#products">제품</a>
+        <a href="#features" class="hide-mobile">기능</a>
+        <a href="https://dojang.servi.im/guide/">사용 안내</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="product-hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Service · 웹 · 무료</p>
+        <h1>인주공방</h1>
+        <p class="sub">이름이나 회사명을 넣어 개인 도장, 회사 사각 직인, 회사 원형 직인, 낙관 모양의 도장 이미지를 만듭니다. 브라우저 안에서 만들고, 투명 PNG와 글꼴 없이 열리는 SVG로 받습니다.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://dojang.servi.im/">바로 쓰기</a>
+          <a class="btn ghost" href="https://dojang.servi.im/guide/">사용 안내</a>
+        </div>
+        <p class="meta">웹 브라우저 · 설치·내려받기 없음 · 회원가입 없음 · 무료</p>
+      </div>
+      <img class="icon" src="/assets/icons/dojang.png" alt="인주공방 아이콘" width="168" height="168">
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>할 수 <em>있는</em> 일</h2>
+          <p>유형을 고르고 문구를 넣으면 도장 이미지를 만듭니다.</p>
+        </div>
+        <div class="features">
+          <div class="feature"><h3>개인 도장</h3><p>이름을 넣어 개인 도장 모양의 이미지를 만듭니다.</p></div>
+          <div class="feature"><h3>회사 사각·원형 직인</h3><p>회사명을 넣어 사각 직인이나 원형 직인 모양의 이미지를 만듭니다.</p></div>
+          <div class="feature"><h3>낙관</h3><p>글씨나 그림에 찍는 낙관 모양의 도장 이미지를 만듭니다.</p></div>
+          <div class="feature"><h3>투명 PNG</h3><p>배경이 투명한 1024×1024 PNG로 받아 문서나 이미지 위에 올립니다.</p></div>
+          <div class="feature"><h3>SVG</h3><p>글꼴이 없는 환경에서도 같은 모양으로 열리는 SVG로 받습니다.</p></div>
+          <div class="feature"><h3>브라우저 안에서만</h3><p>입력한 문구와 이미지를 서버로 보내지 않고 자동 저장하지 않습니다. 회원가입도 없습니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="notice">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>쓰기 전에 <em>알아 두기</em></h2>
+        </div>
+        <ul class="req">
+          <li>인감증명이나 본인 인증이 아닙니다. 도장 이미지를 만들어 줄 뿐이고, 쓰려는 곳에서 받아 주는지는 직접 확인해야 합니다.</li>
+          <li>카카오톡 안의 브라우저에서는 파일을 받을 수 없습니다. 휴대폰의 기본 브라우저로 열어 주세요.</li>
+          <li>설치나 내려받을 프로그램이 없습니다. <a href="https://dojang.servi.im/">dojang.servi.im</a>을 열어 바로 씁니다.</li>
+          <li>쓰는 방법은 <a href="https://dojang.servi.im/guide/">사용 안내</a>, 사용한 글꼴과 소프트웨어의 라이선스는 <a href="https://dojang.servi.im/licenses/">라이선스</a>에 있습니다.</li>
+        </ul>
+        <p class="note">인주공방의 소스는 공개하지 않습니다.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>자주 묻는 <em>질문</em></h2>
+        </div>
+        <div class="faq">
+          <details open><summary>인주공방은 무료인가요?</summary><p>네. 무료이고 회원가입 없이 <a href="https://dojang.servi.im/">dojang.servi.im</a>에서 바로 씁니다. 설치하거나 내려받을 프로그램은 없습니다.</p></details>
+          <details><summary>만든 도장 이미지를 인감이나 본인 인증에 쓸 수 있나요?</summary><p>아니요. 인주공방은 인감증명이나 본인 인증이 아니며 도장 이미지를 만들어 줄 뿐입니다. 쓰려는 곳에서 도장 이미지를 받아 주는지는 직접 확인해야 합니다.</p></details>
+          <details><summary>입력한 이름이나 회사명이 서버로 가나요?</summary><p>아니요. 도장 이미지는 브라우저 안에서만 만들고, 입력한 문구와 이미지를 서버로 보내지 않으며 자동 저장하지 않습니다.</p></details>
+          <details><summary>어떤 파일로 받나요?</summary><p>배경이 투명한 PNG(1024×1024)와 글꼴 없이 열리는 SVG로 받습니다.</p></details>
+          <details><summary>카카오톡에서 열었더니 파일이 받아지지 않아요.</summary><p>카카오톡 안의 브라우저에서는 파일을 받을 수 없습니다. 휴대폰의 기본 브라우저로 열어 주세요.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 servi.im</span>
+      <span><a href="/">모든 제품</a> · <a href="https://dojang.servi.im/">인주공방 열기</a></span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js" type="module"></script>
+</body>
+</html>

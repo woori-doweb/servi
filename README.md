@@ -7,6 +7,7 @@ No build step: the repository root is the web root.
 index.html            product list (cards filtered by category)
 ohmyzip/index.html    ohmyZip page
 ohmypic/index.html    ohMypic page
+dojang/index.html     인주공방 page (web service; source is private, so no repository links)
 404.html              not-found page (wire it as the server's 404 document)
 assets/               style.css, site.js, favicon.svg, icons/
 assets/og/            1200x630 social preview images, assets/logo-512.png (Organization logo)
@@ -27,6 +28,9 @@ New releases appear on the site without a redeploy.
 1. Copy an `<article class="card">` in `index.html`; set `data-cat` to `utility`, `program`, `service` or `solution`.
 2. Add `<name>/index.html` (copy an existing product page) and an icon in `assets/icons/`.
    Update its title, description, canonical/og:url, the `SoftwareApplication`/`BreadcrumbList` JSON-LD and the FAQ.
+   A web service uses `WebApplication` (url = the service address, `operatingSystem` 웹 브라우저) and a
+   「바로 쓰기」 button to the service instead of download/release buttons (see `dojang/index.html`).
+   A product whose source is private gets no GitHub or `git clone` links; list it in `PRIVATE` in `scripts/check_site.py`.
    The `FAQPage` questions must be the same, in the same order, as the visible `<summary>` items.
 3. Add the product to `CARDS` in `scripts/make_images.py`, run it, and point `og:image` at `assets/og/<name>.png`.
 4. If it ships GitHub releases, add an entry to `APPS` in `assets/site.js` and use `data-download="<id>"`.
