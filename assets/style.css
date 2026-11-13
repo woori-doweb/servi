@@ -211,5 +211,8 @@ footer.site a:hover { color: var(--accent); }
 .policy ul { padding-left: 22px; display: grid; gap: 6px; margin: 8px 0; }
 .policy table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 10px 0; }
 .policy th, .policy td { border: 1px solid var(--rule); padding: 8px 10px; text-align: left; vertical-align: top; }
-.policy th { background: var(--bg-alt); font-weight: 600; width: 28%; }
+.policy th { background: var(--bg-alt); font-weight: 600; }
+.policy tr > th:only-of-type { width: 24%; }  /* row-header tables; column-header rows size to content */
+.policy td ul { margin: 4px 0 0; padding-left: 18px; }
+.policy td li { font-size: 14px; }
 .policy .table-scroll { overflow-x: auto; }
