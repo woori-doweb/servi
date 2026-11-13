@@ -1,6 +1,8 @@
-// servi.im — latest release lookup, category filter, copy buttons.
+// servi.im — latest release lookup, category filter, copy buttons, analytics events.
 // Download links already point at the GitHub release page in HTML; this script only
 // upgrades them to the direct asset URL of the newest matching release.
+
+import { track } from './analytics.js';
 
 const APPS = {
   ohmyzip: { repo: 'woori-doweb/ohmyzip', tag: /^v\d/, asset: /-win-x64\.zip$/ },
@@ -40,6 +42,7 @@ async function upgrade(id) {
   for (const a of document.querySelectorAll(`a[data-download="${id}"]`)) {
     a.href = zip.url;
     a.title = zip.name;
+    a.dataset.version = version;
   }
   for (const el of document.querySelectorAll(`[data-version="${id}"]`)) el.textContent = 'v' + version;
   for (const el of document.querySelectorAll(`[data-size="${id}"]`)) el.textContent = mb(zip.size);
@@ -60,6 +63,7 @@ function initFilter() {
     b.querySelector('.n').textContent = n;
     if (n === 0) b.disabled = true;
     b.addEventListener('click', () => {
+      track('category_filter', { category: cat });
       nav.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
       cards.forEach(c => { c.hidden = cat !== 'all' && c.dataset.cat !== cat; });
     });
@@ -70,6 +74,7 @@ function initCopy() {
   for (const b of document.querySelectorAll('.code button')) {
     b.addEventListener('click', async () => {
       const text = b.parentElement.querySelector('code').textContent;
+      track('git_clone_copy', { placement: PLACEMENT });
       try { await navigator.clipboard.writeText(text); b.textContent = '복사됨'; }
       catch { b.textContent = '복사 실패'; }
       setTimeout(() => { b.textContent = '복사'; }, 1600);
@@ -77,7 +82,29 @@ function initCopy() {
   }
 }
 
+const PLACEMENT = location.pathname === '/' ? 'home' : 'product';
+
+function initTracking() {
+  // Capture phase: the event is queued before the browser leaves for github.com.
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-download], a[data-notes]');
+    if (!a) return;
+    if (a.dataset.download) {
+      track('download_click', { app: a.dataset.download, version: a.dataset.version || '(unknown)', placement: PLACEMENT });
+    } else {
+      track('release_notes_click', { app: a.dataset.notes });
+    }
+  }, true);
+  const app = location.pathname.split('/')[1];
+  for (const s of document.querySelectorAll('.faq summary')) {
+    s.addEventListener('click', () => {
+      if (!s.parentElement.open) track('faq_open', { app, question: s.textContent });
+    });
+  }
+}
+
 initFilter();
 initCopy();
+initTracking();
 const ids = new Set([...document.querySelectorAll('[data-download]')].map(a => a.dataset.download));
 for (const id of ids) upgrade(id).catch(err => console.warn('release lookup failed:', id, err.message));

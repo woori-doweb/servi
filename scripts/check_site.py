@@ -93,6 +93,14 @@ def local(apps):
             check(path.is_file(), f"{page}: {ref} exists")
         for app in set(re.findall(r'data-download="(\w+)"', html)):
             check(app in apps, f"{page}: data-download={app} defined in site.js")
+        scripts = re.findall(r'<script src="(/assets/[^"]+\.js)"', html)
+        check(any(s in ("/assets/site.js", "/assets/analytics.js") for s in scripts), f"{page}: loads analytics ({scripts})")
+    for js in (ROOT / "assets").glob("*.js"):
+        for imp in re.findall(r"from '(\./[^']+)'", js.read_text(encoding="utf-8")):
+            check((js.parent / imp).is_file(), f"{js.name}: import {imp} exists")
+    ga = (ROOT / "assets/analytics.js").read_text(encoding="utf-8")
+    check(bool(re.search(r"MEASUREMENT_ID = 'G-[A-Z0-9]{10}'", ga)) and "location.hostname === 'servi.im'" in ga,
+          "analytics.js: GA4 measurement ID set, sends only on servi.im")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for loc in re.findall(r"<loc>https://servi\.im/([^<]*)</loc>", sitemap):
         check((ROOT / loc / "index.html").is_file(), f"sitemap: /{loc} has a page")
@@ -123,8 +131,8 @@ def deployed(base):
         url = base.rstrip("/") + "/" + page.removesuffix("index.html")
         status, body = request(url)
         check(status == 200 and body == (ROOT / page).read_bytes(), f"{url} -> {status}, bytes match repo")
-    for ref in ["/assets/style.css", "/assets/site.js", "/assets/icons/ohmyzip.png", "/assets/og/home.png",
-                "/robots.txt", "/sitemap.xml", "/llms.txt"]:
+    for ref in ["/assets/style.css", "/assets/site.js", "/assets/analytics.js", "/assets/icons/ohmyzip.png",
+                "/assets/og/home.png", "/robots.txt", "/sitemap.xml", "/llms.txt"]:
         status, body = request(base.rstrip("/") + ref)
         check(status == 200 and body == (ROOT / ref.lstrip("/")).read_bytes(), f"{ref} -> {status}, bytes match repo")
     status, _ = request(base.rstrip("/") + "/no-such-page-check")
